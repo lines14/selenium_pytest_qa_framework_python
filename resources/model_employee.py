@@ -1,6 +1,6 @@
 class ModelEmployee:
-    firstName = None
-    lastName = None
+    first_name = None
+    last_name = None
     age = None
     email = None
     salary = None
