@@ -1,5 +1,4 @@
 from main.driver.browser_factory import BrowserFactory
-from main.utils.data.config_manager import ConfigManager
 from main.utils.wait.wait_utils import WaitUtils
 from selenium.webdriver.common.keys import Keys
 from main.utils.log.logger import Logger
