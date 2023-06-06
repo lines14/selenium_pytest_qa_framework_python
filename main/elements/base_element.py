@@ -1,62 +1,62 @@
-from main.driver.browser_factory import BrowserFactory
-from main.utils.wait.wait_utils import WaitUtils
-from selenium.webdriver.common.keys import Keys
 from main.utils.log.logger import Logger
+from selenium.webdriver.common.keys import Keys
+from main.utils.wait.wait_utils import WaitUtils
+from main.driver.browser_factory import BrowserFactory
 
 class BaseElement:
-    def __init__(self, elementLocator, elementName):
-        self.elementLocator = elementLocator
-        self.elementName = elementName
+    def __init__(self, element_locator, element_name):
+        self.element_locator = element_locator
+        self.element_name = element_name
 
-    def getElement(self):
-        WaitUtils.wait_element_located(self.elementLocator)
-        return BrowserFactory.instance.find_element(self.elementLocator)
+    def get_element(self):
+        WaitUtils.wait_element_located(self.element_locator)
+        return BrowserFactory.instance.find_element(self.element_locator)
 
-    def getElements(self):
-        return BrowserFactory.instance.find_elements(self.elementLocator)
+    def get_elements(self):
+        return BrowserFactory.instance.find_elements(self.element_locator)
 
-    def getText(self):
-        Logger.log(f'    ▶ get displayed {self.elementName}')
-        text = (self.getElement()).text
+    def get_text(self):
+        Logger.log(f'    ▶ get displayed {self.element_name}')
+        text = (self.get_element()).text
         Logger.log(f'    ▶ text contains: "{text}"')
         return text
 
-    def clickButton(self):
-        Logger.log(f'    ▶ click {self.elementName}')
-        (self.getElement()).click()
+    def click_button(self):
+        Logger.log(f'    ▶ click {self.element_name}')
+        (self.get_element()).click()
 
-    def inputText(self, text):
-        Logger.log(f'    ▶ input {self.elementName}')
-        (self.getElement()).send_keys(text)
+    def input_text(self, text):
+        Logger.log(f'    ▶ input {self.element_name}')
+        (self.get_element()).send_keys(text)
 
-    def enterText(self, text):
-        Logger.log(f'    ▶ input {self.elementName} and submit')
-        (self.getElement()).send_keys(text + Keys.ENTER)
+    def enter_text(self, text):
+        Logger.log(f'    ▶ input {self.element_name} and submit')
+        (self.get_element()).send_keys(text + Keys.ENTER)
 
-    def getAttributeValue(self, attr):
-        return (self.getElement()).get_attribute(attr)
+    def get_attribute_value(self, attr):
+        return (self.get_element()).get_attribute(attr)
 
-    def elementIsDisplayed(self):
-        Logger.log(f'    ▶ {self.elementName} is present')
-        return (self.getElement()).is_displayed()
+    def element_is_displayed(self):
+        Logger.log(f'    ▶ {self.element_name} is present')
+        return (self.get_element()).is_displayed()
 
-    def elementIsEnabled(self):
-        return (self.getElement()).is_enabled()
+    def element_is_enabled(self):
+        return (self.get_element()).is_enabled()
 
-    def parseChildrenForAttr(self, attr):
-        return list(map(lambda element: element.get_attribute(attr), self.getElements()))
+    def parse_children_for_attr(self, attr):
+        return list(map(lambda element: element.get_attribute(attr), self.get_elements()))
 
-    def parseChildrenForText(self):
-        return list(map(lambda element: element.text, self.getElements()))
+    def parse_children_for_text(self):
+        return list(map(lambda element: element.text, self.get_elements()))
 
-    def waitIsVisible(self):
-        Logger.log(f'    ▶ wait {self.elementName} is visible')
-        WaitUtils.wait_element_visible(self.elementLocator)
+    def wait_is_visible(self):
+        Logger.log(f'    ▶ wait {self.element_name} is visible')
+        WaitUtils.wait_element_visible(self.element_locator)
 
-    def waitStalenessOf(self):
-        WaitUtils.wait_element_staleness_of(self.elementLocator)
+    def wait_staleness_of(self):
+        WaitUtils.wait_element_staleness_of(self.element_locator)
     
-    def waitIsClickable(self):
-        Logger.log(f'    ▶ wait {self.elementName} is clickable')
-        WaitUtils.wait_element_clickable(self.elementLocator)
+    def wait_is_clickable(self):
+        Logger.log(f'    ▶ wait {self.element_name} is clickable')
+        WaitUtils.wait_element_clickable(self.element_locator)
         

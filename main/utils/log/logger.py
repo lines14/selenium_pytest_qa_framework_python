@@ -1,17 +1,20 @@
 from datetime import datetime
-timeList = []
-logList = []
+time_list = []
+log_list = []
 
 class Logger:
+    @staticmethod
     def log(step):
         print(step)
-        logList.append(f' {step}\n')
-        timeList.append(f'{datetime.now()}')
+        log_list.append(f' {step}\n')
+        time_list.append(f'{datetime.now()}')
 
-    def logToFile():
-        summaryList = list(zip(timeList, logList))
+    @staticmethod
+    def log_to_file():
+        summary_list = list(zip(time_list, log_list))
         with open('../../../test/log.txt', 'w', encoding='utf-8') as data:
-            data.write(summaryList)
+            data.write(summary_list)
 
-    def getTimings():
-        return [*timeList]
+    @staticmethod
+    def get_timings():
+        return [*time_list]
