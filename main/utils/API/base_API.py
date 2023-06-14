@@ -1,72 +1,40 @@
-# import axios from 'axios';
-# import logger from '../log/logger.js';
-# import qs from 'qs';
+from requests_toolbelt import sessions
+from main.utils.log.logger import Logger
 
-# class BaseAPI {
-#     constructor(baseURL, logString, timeout, headers) {
-#         if (logString) logger.log(`${logString} ${baseURL}`);
-#         axios.defaults.baseURL = baseURL;
-#         axios.defaults.timeout = timeout;
-#         axios.defaults.headers = headers;
-#     }
+class BaseAPI:
+    def __init__(self, base_URL, log_string, timeout=None, headers=None):
+        if log_string:
+            Logger.log(f'{log_string} {base_URL}')
+        self.session = sessions.BaseUrlSession(base_url=base_URL)
+        self.timeout = timeout
+        self.headers = headers
 
-#     async get(endpoint) {
-#         try {
-#             logger.log(`[info] ▶ get ${endpoint}:`);
-#             const response = await axios.get(endpoint);
-#             logger.log(`[info]   status code: ${response.status}`);
-#             return response;
-#         } catch (error) {
-#             logger.log(`[info]   status code: ${error.response.status}`);
-#             return error.response;
-#         }
-#     }
+    def get(self, endpoint):
+            Logger.log(f'[info] ▶ get {endpoint}:')
+            response = self.session.get(endpoint)
+            Logger.log(f'[info]   status code: {response.status_code}')
+            return response
 
-#     async post(endpoint, params) {
-#         try {
-#             logger.log(`[info] ▶ post ${JSON.stringify(params)} to ${endpoint}:`);
-#             const response = await axios.post(`/${endpoint}`, qs.stringify(params));
-#             logger.log(`[info]   status code: ${response.status}`);
-#             return response;
-#         } catch (error) {
-#             logger.log(`[info]   status code: ${error.response.status}`);
-#             return error.response;
-#         }
-#     }
+    def post(self, endpoint, params):
+        Logger.log(f'[info] ▶ post {params} to {endpoint}:')
+        response = self.session.post(endpoint, json=params)
+        Logger.log(f'[info]   status code: {response.status_code}')
+        return response
 
-#     async put(endpoint, params) {
-#         try {
-#             logger.log(`[info] ▶ put ${JSON.stringify(params)} to ${endpoint}`);
-#             const response = await axios.put(`/${endpoint}`, params);
-#             logger.log(`[info]   status code: ${response.status}`);
-#             return response;
-#         } catch (error) {
-#             logger.log(`[info]   status code: ${error.response.status}`);
-#             return error.response;
-#         }
-#     }
+    def put(self, endpoint, params):
+        Logger.log(f'[info] ▶ put {params} to {endpoint}')
+        response = self.session.put(endpoint, json=params)
+        Logger.log(f'[info]   status code: {response.status_code}')
+        return response
 
-#     async patch(endpoint, params) {
-#         try {
-#             logger.log(`[info] ▶ patch ${JSON.stringify(params)} in ${endpoint}`);
-#             const response = await axios.patch(`/${endpoint}`, params);
-#             logger.log(`[info]   status code: ${response.status}`);
-#             return response;
-#         } catch (error) {
-#             logger.log(`[info]   status code: ${error.response.status}`);
-#             return error.response;
-#         }
-#     }
+    def patch(self, endpoint, params):
+        Logger.log(f'[info] ▶ patch {params} to {endpoint}')
+        response = self.session.patch(endpoint, json=params)
+        Logger.log(f'[info]   status code: {response.status_code}')
+        return response
 
-#     async delete(endpoint) {
-#         try {
-#             logger.log(`[info] ▶ delete ${endpoint}`);
-#             const response = await axios.delete(endpoint);
-#             logger.log(`[info]   status code: ${response.status}`);
-#             return response;
-#         } catch (error) {
-#             logger.log(`[info]   status code: ${error.response.status}`);
-#             return error.response;
-#         }
-#     }
-# }
+    def delete(self, endpoint):
+        Logger.log(f'[info] ▶ delete {endpoint}')
+        response = self.session.delete(endpoint)
+        Logger.log(f'[info]   status code: {response.status_code}')
+        return response
