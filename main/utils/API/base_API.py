@@ -10,31 +10,31 @@ class BaseAPI:
         self.headers = headers
 
     def get(self, endpoint):
-            Logger.log(f'[info] ▶ get {endpoint}:')
-            response = self.session.get(endpoint)
-            Logger.log(f'[info]   status code: {response.status_code}')
-            return response
+        Logger.log(f'[info] ▶ get {endpoint}:')
+        response = self.session.get(endpoint, headers=self.headers)
+        Logger.log(f'[info]   status code: {response.status_code}')
+        return response.json()
 
     def post(self, endpoint, params):
         Logger.log(f'[info] ▶ post {params} to {endpoint}:')
-        response = self.session.post(endpoint, json=params)
+        response = self.session.post(endpoint, json=params, headers=self.headers)
         Logger.log(f'[info]   status code: {response.status_code}')
-        return response
+        return response.json()
 
     def put(self, endpoint, params):
         Logger.log(f'[info] ▶ put {params} to {endpoint}')
-        response = self.session.put(endpoint, json=params)
+        response = self.session.put(endpoint, json=params, headers=self.headers)
         Logger.log(f'[info]   status code: {response.status_code}')
-        return response
+        return response.json()
 
     def patch(self, endpoint, params):
         Logger.log(f'[info] ▶ patch {params} to {endpoint}')
-        response = self.session.patch(endpoint, json=params)
+        response = self.session.patch(endpoint, json=params, headers=self.headers)
         Logger.log(f'[info]   status code: {response.status_code}')
-        return response
+        return response.json()
 
     def delete(self, endpoint):
         Logger.log(f'[info] ▶ delete {endpoint}')
-        response = self.session.delete(endpoint)
+        response = self.session.delete(endpoint, headers=self.headers)
         Logger.log(f'[info]   status code: {response.status_code}')
-        return response
+        return response.json()

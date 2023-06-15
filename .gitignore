@@ -3,3 +3,5 @@ package-lock.json
 node_modules/
 .idea/
 .pytest_cache/
+resources/client_secret*
+resources/API_token.json

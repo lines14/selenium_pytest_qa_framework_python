@@ -1,5 +1,6 @@
 {
-    "API_base_URL": "https://jsonplaceholder.typicode.com",
-    "API_timeout": 1500,
+    "API_base_URL": "https://gmail.googleapis.com",
+    "API_auth_URL": "https://oauth2.googleapis.com",
+    "API_timeout": 1.5,
     "API_requests_limit": 5
 }

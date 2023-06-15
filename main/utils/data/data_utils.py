@@ -1,7 +1,7 @@
 import json
 from main.utils.log.logger import Logger
 
-class JSONUtils:
+class DataUtils:
     @staticmethod
     def is_JSON(API_response):
         try:
@@ -15,7 +15,7 @@ class JSONUtils:
     @staticmethod
     def JSON_to_models(JSON_list):
         Logger.log('    ▶ get models from JSON')
-        return list(map(lambda element: type("ModelEmployee", (object, ), json.loads(element)), JSON_list))
+        return list(map(lambda element: type("Model", (object, ), element), JSON_list))
 
     @staticmethod
     def data_to_models(parent_class, data_matrix, rows_count=1, counter=0):

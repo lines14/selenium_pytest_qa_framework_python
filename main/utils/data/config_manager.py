@@ -32,3 +32,21 @@ class ConfigManager:
     def get_DB_config_data():
         with open('../../../resources/DB_config_data.json', 'r', encoding='utf-8') as data:
             return type("DBConfigData", (object, ), json.loads(data.read()))
+        
+    @staticmethod
+    def get_API_client_secret():
+        try:
+            for file in os.listdir('../../../resources'):
+                if file.startswith('client_secret'):
+                    with open(f'../../../resources/{file}', 'r', encoding='utf-8') as data:
+                        return type("ClientSecret", (object, ), json.loads(data.read())['installed'])
+        except:
+            return None
+                
+    @staticmethod
+    def get_API_access_token():
+        try:
+            with open('../../../resources/API_token.json', 'r', encoding='utf-8') as data:
+                return type("AccessToken", (object, ), json.loads(data.read())).access_token
+        except:
+            return None
