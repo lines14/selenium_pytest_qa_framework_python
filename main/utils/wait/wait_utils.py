@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from main.driver.browser_factory import BrowserFactory
 from selenium.webdriver.support.ui import WebDriverWait
 from main.utils.data.config_manager import ConfigManager
@@ -13,17 +14,17 @@ class WaitUtils:
         return WebDriverWait(BrowserFactory.instance, ConfigManager.get_config_data().wait_time).until(expected_conditions.alert_is_present())
     
     @staticmethod
-    def wait_element_located(element):
-        WebDriverWait(BrowserFactory.instance, ConfigManager.get_config_data().wait_time).until(expected_conditions.presence_of_element_located(element))
+    def wait_element_located(locator):
+        WebDriverWait(BrowserFactory.instance, ConfigManager.get_config_data().wait_time).until(expected_conditions.presence_of_element_located((By.XPATH, locator)))
 
     @staticmethod
-    def wait_element_visible(element):
-        WebDriverWait(BrowserFactory.instance, ConfigManager.get_config_data().wait_time).until(expected_conditions.visibility_of_element_located(element))
+    def wait_element_visible(locator):
+        WebDriverWait(BrowserFactory.instance, ConfigManager.get_config_data().wait_time).until(expected_conditions.visibility_of_element_located((By.XPATH, locator)))
 
     @staticmethod
-    def wait_element_staleness_of(element):
-        WebDriverWait(BrowserFactory.instance, ConfigManager.get_config_data().wait_time).until(expected_conditions.staleness_of(element))
+    def wait_element_staleness_of(locator):
+        WebDriverWait(BrowserFactory.instance, ConfigManager.get_config_data().wait_time).until(expected_conditions.staleness_of((By.XPATH, locator)))
 
     @staticmethod
-    def wait_element_clickable(element):
-        WebDriverWait(BrowserFactory.instance, ConfigManager.get_config_data().wait_time).until(expected_conditions.element_to_be_clickable(element))
+    def wait_element_clickable(locator):
+        WebDriverWait(BrowserFactory.instance, ConfigManager.get_config_data().wait_time).until(expected_conditions.element_to_be_clickable((By.XPATH, locator)))

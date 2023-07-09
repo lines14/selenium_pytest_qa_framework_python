@@ -1,4 +1,5 @@
 from main.utils.log.logger import Logger
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from main.utils.wait.wait_utils import WaitUtils
 from main.driver.browser_factory import BrowserFactory
@@ -9,11 +10,10 @@ class BaseElement:
         self.element_name = element_name
 
     def get_element(self):
-        WaitUtils.wait_element_located(self.element_locator)
-        return BrowserFactory.instance.find_element(self.element_locator)
+        return BrowserFactory.instance.find_element(By.XPATH, self.element_locator)
 
     def get_elements(self):
-        return BrowserFactory.instance.find_elements(self.element_locator)
+        return BrowserFactory.instance.find_elements(By.XPATH, self.element_locator)
 
     def get_text(self):
         Logger.log(f'    ▶ get displayed {self.element_name}')

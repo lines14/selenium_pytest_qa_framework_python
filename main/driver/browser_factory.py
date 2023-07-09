@@ -1,11 +1,12 @@
+import classutilities
 from selenium import webdriver
 from main.utils.data.config_manager import ConfigManager
 
-class BrowserFactory:
+class BrowserFactory(classutilities.ClassPropertiesMixin):
     __instance = None
 
     @classmethod
-    def create_instance(cls):
+    def init_instance(cls):
         if (cls.__instance is None):
             if (ConfigManager.get_config_data().browser == 'chrome'):
                 options = webdriver.ChromeOptions()
@@ -23,10 +24,9 @@ class BrowserFactory:
                 if (ConfigManager.get_config_data().is_maximize):
                     cls.__instance.maximize_window()
 
-    @property
+    @classutilities.classproperty
     def instance(cls):
-        if (cls.__instance):
-            return cls.__instance
+        return cls.__instance
         
     @instance.setter
     def instance(cls, value):
