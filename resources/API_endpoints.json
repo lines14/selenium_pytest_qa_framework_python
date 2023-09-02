@@ -1,4 +1,4 @@
 {
-    "API_token": "token",
-    "API_messages": "gmail/v1/users/me/messages"
+    "posts": "",
+    "users": ""
 }

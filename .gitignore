@@ -1,7 +1,3 @@
-test/log.txt
-package-lock.json
-node_modules/
+tests/log.txt
 .idea/
 .pytest_cache/
-resources/client_secret*
-resources/API_token.json

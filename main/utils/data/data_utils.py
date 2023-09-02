@@ -9,19 +9,19 @@ class DataUtils:
             Logger.log('[info] ▶ api response is json')
             return type(result) == dict
         except:
-            Logger.log('[error]▶ api response is not json!')
+            Logger.log('[erro] ▶ api response is not json!')
             return False
         
     @staticmethod
     def JSON_to_models(JSON_list):
-        Logger.log('    ▶ get models from JSON')
+        Logger.log('[info] ▶ get models from JSON')
         return list(map(lambda element: type("Model", (object, ), element), JSON_list))
 
     @staticmethod
     def data_to_models(parent_class, data_matrix, rows_count=1, counter=0):
         models_list = []
         if rows_count > 1:
-            Logger.log('    ▶ get models from table')
+            Logger.log('[info] ▶ get models from table')
         while counter < rows_count:
             model_fields = list(filter(lambda attr: not attr.startswith("__"), dir(parent_class)))
             model_dict = dict.fromkeys(model_fields)

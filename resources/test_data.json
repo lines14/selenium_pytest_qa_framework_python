@@ -1,11 +1,3 @@
 {
-    "random_text": "random text",
-    "alert_text_one": "You clicked a button",
-    "alert_text_two": "Do you confirm action?",
-    "alert_text_three": "Please enter your name",
-    "label_text": "You entered ",
-    "parent_frame_text": "Parent frame",
-    "child_iframe_text": "Child Iframe",
-    "user_one": "Jon,Snow,30,knownothing@gmail.com,3000,alpha,",
-    "user_two": "Buttercup,Cumbersnatch,41,BudapestCandygram@mail.io,2000,beta,"
+    "template": null
 }
