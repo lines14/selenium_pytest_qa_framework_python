@@ -1,4 +1,4 @@
 {
-    "posts": "",
-    "users": ""
+    "posts": "/posts",
+    "users": "/users"
 }

@@ -1,21 +1,22 @@
-import json
 from main.utils.log.logger import Logger
 
 class DataUtils:
     @staticmethod
     def is_JSON(API_response):
-        try:
-            result = json.loads(API_response)
-            Logger.log('[info] ▶ api response is json')
-            return type(result) == dict
-        except:
-            Logger.log('[erro] ▶ api response is not json!')
-            return False
-        
+        Logger.log('[info] ▶ check API response is JSON')
+        if type(API_response) == list:
+            return type(API_response.pop()) == dict
+        else:
+            return type(API_response) == dict
+    
     @staticmethod
-    def JSON_to_models(JSON_list):
+    def model_to_dict(model):
+        return {key: value for key, value in vars(model).items() if not key.startswith('__')}
+
+    @staticmethod
+    def dict_list_to_models_list(dict_list):
         Logger.log('[info] ▶ get models from JSON')
-        return list(map(lambda element: type("Model", (object, ), element), JSON_list))
+        return list(map(lambda element: type("Model", (object, ), element), dict_list))
 
     @staticmethod
     def data_to_models(parent_class, data_matrix, rows_count=1, counter=0):

@@ -10,7 +10,8 @@ from tests.page_objects.sample_page import SamplePage
 from tests.page_objects.links_page import LinksPage
 
 class TestUI(BaseTest):
-    def test_handles(self):
+    @staticmethod
+    def test_handles():
         main_page = MainPage()
         alerts_frame_windows_page = AlertsFrameWindowsPage()
         left_menu_form = LeftMenuForm()
