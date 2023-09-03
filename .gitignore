@@ -1,3 +1,4 @@
+.env
 tests/log.txt
 .idea/
 .pytest_cache/
