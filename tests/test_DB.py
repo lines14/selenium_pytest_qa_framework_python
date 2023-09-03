@@ -7,9 +7,11 @@ from main.utils.data.config_manager import ConfigManager
 class TestDB(BaseTest):
     @classmethod
     def test_DB(cls):
-        response = cls.project_DB.get_first_project()
-        assert_(response, ConfigManager.get_test_data().projectName, 'response equals expected', Operators.EQUAL)
+        response = cls.project_DB.get_first_project_name()
+        assert_(response, ConfigManager.get_test_data().projectName, 'first project name equals expected', Operators.EQUAL)
+        response = prev_response = cls.project_DB.get_first_author_data()
+        assert_(len(response), 4, 'author data contains four fields', Operators.EQUAL)
         prev_response = cls.project_DB.get_all_projects()
         cls.project_DB.add_project(Randomizer.get_random_string(False, False, False, False, 5))
         response = cls.project_DB.get_all_projects()
-        assert_truth(len(response) > len(prev_response), 'added new project')
+        assert_truth(len(response) > len(prev_response), 'successfully added new project to the table')

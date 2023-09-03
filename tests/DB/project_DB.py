@@ -13,9 +13,12 @@ class ProjectDB(BaseDB):
             '' or os.environ.get('DB_PORT')
         )
 
-    def get_first_project(self):
+    def get_first_project_name(self):
         results = super().sql_select('project', 'name', 'ORDER BY `id` ASC LIMIT 1')
         return list(results.pop()).pop()
+    
+    def get_first_author_data(self):
+        return (super().sql_select('author', conditions='ORDER BY `id` ASC LIMIT 1')).pop()
     
     def get_all_projects(self):
         return super().sql_select('project', 'name', 'ORDER BY `id`')

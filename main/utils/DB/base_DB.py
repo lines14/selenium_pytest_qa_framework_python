@@ -27,19 +27,27 @@ class BaseDB:
         try:
             cursor = self.connection.cursor()
             cursor.execute(query)
-            results = cursor.fetchall()
+            response = cursor.fetchall()
             self.connection.commit()
-            Logger.log(f'[info]   result is: "{results}"')
-            return results
+            return response
         except mysql.connector.Error as err:
             Logger.log(f'[erro]   {err}')
 
     def sql_select(self, tableName, target='*', conditions=''):
         Logger.log(f'[info] ▶ select "{target}" from "{tableName}" table:')
         query = f'SELECT {target} FROM {tableName} {conditions};'
-        return self.sql_query(query)
+        response = self.sql_query(query)
+        if len(response) == 1:
+            if len(response[0]) == 1:
+                Logger.log(f'[info]   result is: "{response[0][0]}"')
+            else:
+                Logger.log(f'[info]   result is: "{response[0]}"')
+        else:
+            Logger.log(f'[info]   result is: "{response}"')
+        
+        return response
     
     def sql_insert(self, tableName, target='', values=''):
-        Logger.log(f'[info] ▶ insert into "{tableName}" table values {values}:')
+        Logger.log(f'[info] ▶ insert into "{tableName}" table values {values}')
         query = f"INSERT INTO {tableName} ({target}) VALUES ({values});"
-        return self.sql_query(query)
+        self.sql_query(query)
